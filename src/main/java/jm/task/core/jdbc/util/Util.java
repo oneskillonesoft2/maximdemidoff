@@ -40,10 +40,6 @@ public class Util {
         properties.setProperty("hibernate.connection.characterEncoding", "utf8");
         properties.setProperty("hibernate.current_session_context_class", "thread");
 
-
-//    <property name = "hibernate.connection.characterEncoding" > utf8 </property >
-//    <property name = "hibernate.current_session_context_class" > thread </property >
-
         return properties;
     }
 
