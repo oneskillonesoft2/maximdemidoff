@@ -90,7 +90,6 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             NativeQuery<User>query = session.createNativeQuery(sql);
-            session.createSQLQuery("DELETE FROM users WHERE id = " + id);
             query.executeUpdate();
             transaction.commit();
             if (id > 0) {
@@ -117,13 +116,11 @@ public class UserDaoHibernateImpl implements UserDao {
             users = session.createQuery("FROM User").getResultList();
             transaction.commit();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
-        }
+            }
         return users;
-    }
+        }
+
 
     @Override
     public void cleanUsersTable() {

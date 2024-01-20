@@ -16,15 +16,24 @@ public class Util {
     public static final String url = "jdbc:postgresql://localhost:5432/postgres";
     public static final String userName = "postgres";
     public static final String password = "root";
-
-
     private static final String DRIVER = "org.postgresql.Driver";
 
-    private static SessionFactory sessionFactory;
+    public static Connection getConnection() {
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, userName, password);
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url, userName, password);
+            System.out.println("Соединениние успешно...");
+        } catch (SQLException e) {
+            System.out.println("Соединениние не успешно...");
+            throw new RuntimeException(e);
+
+        }
+
+        return conn;
     }
+
+    private static SessionFactory sessionFactory;
 
     public static Properties getProperties() {
         Properties properties = new Properties();
